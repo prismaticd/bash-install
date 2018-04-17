@@ -6,7 +6,12 @@ services:
       - /opt/graylog/data/mongo:/data/db
   some-elasticsearch:
     image: "elasticsearch:5"
+    # vm.max_map_count 262144
+
     environment:
+      transport.type: local
+      index.number_of_shards: 1
+      index.number_of_replicas: 0
       http.host: 0.0.0.0
       xpack.security.enabled: 'false'
       ES_JAVA_OPTS: "-Xms1024m -Xmx1024m"
@@ -16,7 +21,10 @@ services:
     image: graylog/graylog:2.4
     volumes:
       - /opt/graylog/data/journal:/usr/share/graylog/data/journal
-      #- /opt/graylog/config:/usr/share/graylog/data/config
+      # sudo mkdir plugins && cd plugins
+      # sudo wget https://github.com/graylog-labs/graylog-plugin-slack/releases/download/3.0.1/graylog-plugin-slack-3.0.1.jar
+      # cd .. && sudo chown 1100 -R plugins/
+      - /opt/graylog/plugins/graylog-plugin-slack-3.0.1.jar:/usr/share/graylog/plugin/graylog-plugin-slack-3.0.1.jar
     environment:
       GRAYLOG_PASSWORD_SECRET: ${GRAYLOG_PASSWORD_SECRET}
       # admin // ${GRAYLOG_ADMIN_PASSWORD}
