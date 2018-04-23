@@ -1,0 +1,21 @@
+version: '3'
+services:
+  some-elasticsearch:
+    image: "docker.elastic.co/elasticsearch/elasticsearch:6.2.4"
+    environment:
+      http.host: 0.0.0.0
+      xpack.security.enabled: 'false'
+      discovery.type: 'single-node'
+      bootstrap.memory_lock: true
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    volumes:
+      # sudo mkdir ./data &&  sudo chown 1000 ./data/
+      - /opt/elasticsearch/data:/usr/share/elasiticsearch/data
+    ports:
+      - "9200:9200"
+  some-kibana:
+    image: "docker.elastic.co/kibana/kibana:6.2.4"
+    links:
+      - some-elasticsearch:elasticsearch
+    ports:
+      - "5601:5601"

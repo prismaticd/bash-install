@@ -75,7 +75,7 @@ class BashBundler:
 
 
 if __name__ == '__main__':
-    ignore_dirs = ['vendor', 'common']
+    ignore_dirs = ['vendor', 'common', 'docs']
     d = os.path.dirname(os.path.abspath(__file__))
     vendor_directory = os.path.join(d, 'vendor')
     directories = [os.path.join(d, o) for o in os.listdir(d) if os.path.isdir(os.path.join(d, o))]
