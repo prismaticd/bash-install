@@ -12,7 +12,7 @@ sudo service docker start
 
 # END-INCLUDE:  ../common/install_docker.sh
 # START-INCLUDE: ../common/install_docker_compose.sh
-DOCKER_COMPOSE_V="1.21.0"
+DOCKER_COMPOSE_V="1.22.0"
 DOCKER_COMPOSE_LINK="https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_V}/docker-compose-$(uname -s)-$(uname -m)"
 DISTRIB_NAME="ubuntu"
 DISTRIB_VERSION="xenial"
@@ -53,3 +53,7 @@ template=$(echo "dmVyc2lvbjogJzMnCnNlcnZpY2VzOgogIHNvbWUtZWxhc3RpY3NlYXJjaDoKICA
 cd ${MAIN_FOLDER}
 sudo docker-compose pull
 
+#benoit@nocnoc-backend:/opt/elasticsearch$ sudo su
+#root@nocnoc-backend:/opt/elasticsearch# echo -e "[Service]\nLimitMEMLOCK=infinity" | SYSTEMD_EDITOR=tee systemctl edit docker.service
+#[Service]
+#LimitMEMLOCK=infinity

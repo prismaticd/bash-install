@@ -21,3 +21,7 @@ GRAYLOG_ADMIN_PASSWORD_SHA2=$(echo -n ${GRAYLOG_ADMIN_PASSWORD} | shasum -a 256)
 cd ${MAIN_FOLDER}
 sudo docker-compose pull
 
+#benoit@nocnoc-backend:/opt/elasticsearch$ sudo su
+#root@nocnoc-backend:/opt/elasticsearch# echo -e "[Service]\nLimitMEMLOCK=infinity" | SYSTEMD_EDITOR=tee systemctl edit docker.service
+#[Service]
+#LimitMEMLOCK=infinity

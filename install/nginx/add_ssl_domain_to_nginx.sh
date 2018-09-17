@@ -13,6 +13,7 @@ fi
 
 SLUGIFYDOMAIN=$(slugify ${DOMAINNAME})
 
+mkdir -p /etc/nginx/certs/
 issue_cert() {
   acme.sh --issue -d ${DOMAINNAME} --stateless --key-file /etc/nginx/certs/${DOMAINNAME}.key.pem --fullchain-file  /etc/nginx/certs/${DOMAINNAME}.cert.pem --reloadcmd "sudo service nginx reload"
 }
