@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 DISTRIB_NAME="ubuntu"
-DISTRIB_VERSION="xenial"
+#DISTRIB_VERSION="xenial"
+DISTRIB_VERSION="bionic"
 
 sudo apt-get update
 sudo apt-get install apt-transport-https -y

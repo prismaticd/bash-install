@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import re
 import os
 import base64
@@ -30,10 +32,11 @@ class BashBundler:
         with open(self.output_file, "w") as w:
             with open(self.entrypoint) as e:
                 os.chdir(os.path.dirname(os.path.abspath(self.entrypoint)))
-                for line in self.bundle_file(e, minify=False):
+                for line in self.bundle_file(e, minify=True):
                     w.write(line)
 
     def bundle_file(self, file_descriptor, minify=True):
+        previous_line = ''
         for line in file_descriptor:
             other_include = include_source_regex.match(line)
             template_match = render_template_regex.match(line)
@@ -50,9 +53,17 @@ class BashBundler:
                 if minify:
                     minified = minify_line(line)
                     if minified:
-                        yield minified
+                        if not previous_line.strip() and not minified.strip():
+                            # 2 empty lines
+                            pass
+                        else:
+                            previous_line = minified
+                            yield minified
                 else:
                     yield line
+
+        yield f"""\necho "$(date '+%Y-%m-%d %H:%M:%S') Finished {file_descriptor.name}"""
+
 
     def bundle_template(self, from_file, to_location, flag):
         yield "# START-RENDERING TEMPLATE \n"
@@ -77,6 +88,7 @@ class BashBundler:
 if __name__ == '__main__':
     ignore_dirs = ['vendor', 'common', 'docs']
     d = os.path.dirname(os.path.abspath(__file__))
+    os.chdir(d)
     vendor_directory = os.path.join(d, 'vendor')
     directories = [os.path.join(d, o) for o in os.listdir(d) if os.path.isdir(os.path.join(d, o))]
     for o in os.listdir(d):
