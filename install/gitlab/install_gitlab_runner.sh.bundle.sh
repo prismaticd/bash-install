@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # START-INCLUDE: ../common/install_docker.sh
 DISTRIB="bionic"
 sudo apt-get update

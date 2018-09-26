@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 set -e
 # START-INCLUDE: ../common/install_docker.sh
 DISTRIB="bionic"
@@ -24,13 +26,18 @@ echo "Docker compose installed is $DOCKER_COMPOSE_V latest is $LATEST"
 
 echo "$(date '+%Y-%m-%d %H:%M:%S') Finished ../common/install_docker_compose.sh
 # END-INCLUDE:  ../common/install_docker_compose.sh
+
 sudo apt install pwgen
+
 MAIN_FOLDER=/opt/elasticsearch/
+
 sudo mkdir -p ${MAIN_FOLDER}
 sudo mkdir -p "${MAIN_FOLDER}data/"
+
 GRAYLOG_PASSWORD_SECRET=$(pwgen -N 1 -s 96)
 GRAYLOG_ADMIN_PASSWORD=$(pwgen -N 1 -s 32)
 GRAYLOG_ADMIN_PASSWORD_SHA2=$(echo -n ${GRAYLOG_ADMIN_PASSWORD} | shasum -a 256)
+
 # START-RENDERING TEMPLATE 
 regex='\$\{([a-zA-Z_][a-zA-Z_0-9]*)\}'
 sudo echo "Rendering templates/docker_compose.yml into /opt/elasticsearch/docker-compose.yml"
@@ -48,4 +55,8 @@ template=$(echo "dmVyc2lvbjogJzMnCnNlcnZpY2VzOgogIHNvbWUtZWxhc3RpY3NlYXJjaDoKICA
 cd ${MAIN_FOLDER}
 sudo docker-compose pull
 
+#benoit@nocnoc-backend:/opt/elasticsearch$ sudo su
+#root@nocnoc-backend:/opt/elasticsearch# echo -e "[Service]\nLimitMEMLOCK=infinity" | SYSTEMD_EDITOR=tee systemctl edit docker.service
+#[Service]
+#LimitMEMLOCK=infinity
 echo "$(date '+%Y-%m-%d %H:%M:%S') Finished /home/benoit/git/bash-install/install/elasticsearch/install_elasticsearch_docker.sh

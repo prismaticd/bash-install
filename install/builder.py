@@ -32,7 +32,7 @@ class BashBundler:
         with open(self.output_file, "w") as w:
             with open(self.entrypoint) as e:
                 os.chdir(os.path.dirname(os.path.abspath(self.entrypoint)))
-                for line in self.bundle_file(e, minify=True):
+                for line in self.bundle_file(e, minify=False):
                     w.write(line)
 
     def bundle_file(self, file_descriptor, minify=True):
@@ -60,7 +60,12 @@ class BashBundler:
                             previous_line = minified
                             yield minified
                 else:
-                    yield line
+                    if not previous_line.strip() and not line.strip():
+                        # 2 empty lines
+                        pass
+                    else:
+                        previous_line = line
+                        yield line
 
         yield f"""\necho "$(date '+%Y-%m-%d %H:%M:%S') Finished {file_descriptor.name}"""
 

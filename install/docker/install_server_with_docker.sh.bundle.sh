@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 set -e
 # START-INCLUDE: ../common/install_docker.sh
 DISTRIB="bionic"

@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 set -e
 # START-INCLUDE: ../common/install_docker.sh
 DISTRIB="bionic"
@@ -24,13 +26,18 @@ echo "Docker compose installed is $DOCKER_COMPOSE_V latest is $LATEST"
 
 echo "$(date '+%Y-%m-%d %H:%M:%S') Finished ../common/install_docker_compose.sh
 # END-INCLUDE:  ../common/install_docker_compose.sh
+
 sudo apt install pwgen
+
 MAIN_FOLDER=/opt/graylog/
+
 sudo mkdir -p ${MAIN_FOLDER}
 sudo mkdir -p "${MAIN_FOLDER}data/"
+
 GRAYLOG_PASSWORD_SECRET=$(pwgen -N 1 -s 96)
 GRAYLOG_ADMIN_PASSWORD=$(pwgen -N 1 -s 32)
 GRAYLOG_ADMIN_PASSWORD_SHA2=$(echo -n ${GRAYLOG_ADMIN_PASSWORD} | shasum -a 256)
+
 # START-RENDERING TEMPLATE 
 regex='\$\{([a-zA-Z_][a-zA-Z_0-9]*)\}'
 sudo echo "Rendering templates/docker_compose.yml into /opt/graylog/docker-compose.yml"
@@ -47,6 +54,7 @@ template=$(echo "dmVyc2lvbjogJzInCnNlcnZpY2VzOgogIHNvbWUtbW9uZ286CiAgICBpbWFnZTo
 # END-RENDERING TEMPLATE 
 cd ${MAIN_FOLDER}
 sudo docker-compose pull
+
 echo 'add: 10 * * * * docker system  prune --filter "until=36h" --force && sudo docker volume  prune --force'
 
 echo "$(date '+%Y-%m-%d %H:%M:%S') Finished /home/benoit/git/bash-install/install/graylog/install_graylog_docker.sh
