@@ -12,7 +12,7 @@ echo "deb-src http://nginx.org/packages/$DISTRIB_NAME/ $DISTRIB_VERSION nginx" |
 sudo apt-get update
 sudo apt-get install  ca-certificates ntp htop ncdu git jq nginx -y
 
-echo "$(date '+%Y-%m-%d %H:%M:%S') Finished ../common/install_nginx.sh
+echo "$(date '+%Y-%m-%d %H:%M:%S') Finished ../common/install_nginx.sh" 
 # END-INCLUDE:  ../common/install_nginx.sh
 
 DATE=`date '+%Y-%m-%d %H:%M:%S'`
@@ -46,4 +46,4 @@ template=$(echo "JHtHRU5FUkFURVNUUklOR30Kc2VydmVyIHsKICBsaXN0ZW4gODAgZGVmYXVsdF9
 fi
 
 
-echo "$(date '+%Y-%m-%d %H:%M:%S') Finished /home/benoit/git/bash-install/install/nginx/install_nginx_letsencrypt.sh
+echo "$(date '+%Y-%m-%d %H:%M:%S') Finished /home/benoit/git/bash-install/install/nginx/install_nginx_letsencrypt.sh" 

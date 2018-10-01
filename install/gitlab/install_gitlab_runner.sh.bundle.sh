@@ -11,7 +11,7 @@ sudo apt-get install ntp htop ncdu jq docker-ce -y
 sudo usermod -aG docker ${USER}
 sudo service docker start
 
-echo "$(date '+%Y-%m-%d %H:%M:%S') Finished ../common/install_docker.sh
+echo "$(date '+%Y-%m-%d %H:%M:%S') Finished ../common/install_docker.sh" 
 # END-INCLUDE:  ../common/install_docker.sh
 sudo apt-get update
 sudo apt-get upgrade -y
@@ -21,4 +21,4 @@ sudo apt-get autoremove -y
 sudo adduser gitlab-runner docker
 echo 'sudo gitlab-runner register --url https://gitlab.com --name $HOSTNAME --tag-list linux,shell --executor shell'
 
-echo "$(date '+%Y-%m-%d %H:%M:%S') Finished /home/benoit/git/bash-install/install/gitlab/install_gitlab_runner.sh
+echo "$(date '+%Y-%m-%d %H:%M:%S') Finished /home/benoit/git/bash-install/install/gitlab/install_gitlab_runner.sh" 

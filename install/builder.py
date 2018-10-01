@@ -67,7 +67,7 @@ class BashBundler:
                         previous_line = line
                         yield line
 
-        yield f"""\necho "$(date '+%Y-%m-%d %H:%M:%S') Finished {file_descriptor.name}"""
+        yield f"""\necho "$(date '+%Y-%m-%d %H:%M:%S') Finished {file_descriptor.name}" """
 
 
     def bundle_template(self, from_file, to_location, flag):
