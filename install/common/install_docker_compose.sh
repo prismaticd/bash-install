@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-DOCKER_COMPOSE_V="1.22.0"
+DOCKER_COMPOSE_V="1.23.2"
 DOCKER_COMPOSE_LINK="https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_V}/docker-compose-$(uname -s)-$(uname -m)"
 DISTRIB_NAME="ubuntu"
 #DISTRIB_VERSION="xenial"

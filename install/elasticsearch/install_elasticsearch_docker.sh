@@ -25,3 +25,6 @@ sudo docker-compose pull
 #root@nocnoc-backend:/opt/elasticsearch# echo -e "[Service]\nLimitMEMLOCK=infinity" | SYSTEMD_EDITOR=tee systemctl edit docker.service
 #[Service]
 #LimitMEMLOCK=infinity
+echo "grep vm.max_map_count /etc/sysctl.conf"
+echo "vm.max_map_count=262144"
+echo "sysctl -w vm.max_map_count=262144"

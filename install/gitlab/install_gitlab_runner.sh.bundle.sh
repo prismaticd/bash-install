@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 # START-INCLUDE: ../common/install_docker.sh
 DISTRIB="bionic"
@@ -21,4 +22,5 @@ sudo apt-get autoremove -y
 sudo adduser gitlab-runner docker
 echo 'sudo gitlab-runner register --url https://gitlab.com --name $HOSTNAME --tag-list linux,shell --executor shell'
 
+echo '10 * * * * docker system  prune --all --filter "until=36h" --force && docker volume  prune --force'
 echo "$(date '+%Y-%m-%d %H:%M:%S') Finished /home/benoit/git/bash-install/install/gitlab/install_gitlab_runner.sh" 

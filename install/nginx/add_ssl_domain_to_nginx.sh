@@ -13,9 +13,11 @@ fi
 
 SLUGIFYDOMAIN=$(slugify ${DOMAINNAME})
 
-mkdir -p /etc/nginx/certs/
+sudo mkdir -p /etc/nginx/certs/
+sudo chown root:${USER} /etc/nginx/certs/
+sudo chmod 770 /etc/nginx/certs/
 issue_cert() {
-  acme.sh --issue -d ${DOMAINNAME} --stateless --key-file /etc/nginx/certs/${DOMAINNAME}.key.pem --fullchain-file  /etc/nginx/certs/${DOMAINNAME}.cert.pem --reloadcmd "sudo service nginx reload"
+  ~/.acme.sh/acme.sh --issue -d ${DOMAINNAME} --stateless --key-file /etc/nginx/certs/${DOMAINNAME}.key.pem --fullchain-file  /etc/nginx/certs/${DOMAINNAME}.cert.pem --reloadcmd "sudo service nginx reload"
 }
 
 
@@ -56,7 +58,7 @@ select opt in "${options[@]}" "Quit"; do
 
 done
 
-
+sudo service nginx reload
 
 
 

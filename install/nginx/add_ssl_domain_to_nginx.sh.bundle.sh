@@ -19,9 +19,11 @@ fi
 
 SLUGIFYDOMAIN=$(slugify ${DOMAINNAME})
 
-mkdir -p /etc/nginx/certs/
+sudo mkdir -p /etc/nginx/certs/
+sudo chown root:${USER} /etc/nginx/certs/
+sudo chmod 770 /etc/nginx/certs/
 issue_cert() {
-  acme.sh --issue -d ${DOMAINNAME} --stateless --key-file /etc/nginx/certs/${DOMAINNAME}.key.pem --fullchain-file  /etc/nginx/certs/${DOMAINNAME}.cert.pem --reloadcmd "sudo service nginx reload"
+  ~/.acme.sh/acme.sh --issue -d ${DOMAINNAME} --stateless --key-file /etc/nginx/certs/${DOMAINNAME}.key.pem --fullchain-file  /etc/nginx/certs/${DOMAINNAME}.cert.pem --reloadcmd "sudo service nginx reload"
 }
 
 title="You want to install SSL for ${DOMAIN}"
@@ -97,6 +99,8 @@ template=$(echo "JHtHRU5FUkFURVNUUklOR30Kc2VydmVyIHsKICAgIGxpc3RlbiA0NDMgc3NsIGh
     esac
 
 done
+
+sudo service nginx reload
 
 
 echo "$(date '+%Y-%m-%d %H:%M:%S') Finished /home/benoit/git/bash-install/install/nginx/add_ssl_domain_to_nginx.sh" 
