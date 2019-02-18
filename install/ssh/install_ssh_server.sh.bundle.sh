@@ -45,5 +45,5 @@ template=$(echo "c3NoLXJzYSBBQUFBQjNOemFDMXljMkVBQUFBREFRQUJBQUFCQVFDbThjdHlWTUl
 # END-RENDERING TEMPLATE 
 
 ME=$(whoami)
-sudo chown ${ME}:${ME} ~/.ssh/authorized_kedjango ys
+sudo chown ${ME}:${ME} ~/.ssh/authorized_keys
 echo "$(date '+%Y-%m-%d %H:%M:%S') Finished /home/benoit/git/bash-install/install/ssh/install_ssh_server.sh" 

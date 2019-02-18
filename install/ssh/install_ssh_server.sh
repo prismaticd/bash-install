@@ -15,4 +15,4 @@ chmod 700 ~/.ssh/
 # RENDER TEMPLATE templates/authorized_keys INTO ~/.ssh/authorized_keys IGNORE
 
 ME=$(whoami)
-sudo chown ${ME}:${ME} ~/.ssh/authorized_kedjango ys
+sudo chown ${ME}:${ME} ~/.ssh/authorized_keys
